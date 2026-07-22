@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cashler — Coming Soon</title>
+<style>
+  :root {
+    --overlay: rgba(0, 0, 0, 0.45);
+    --glass: rgba(255, 255, 255, 0.08);
+    --glass-hover: rgba(255, 255, 255, 0.16);
+    --border: rgba(255, 255, 255, 0.35);
+    --text: #ffffff;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    color: var(--text);
+    position: relative;
+  }
+
+  /* Background video */
+  .bg-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: -2;
+  }
+
+  /* Transparent dark overlay over the video */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--overlay);
+    z-index: -1;
+  }
+
+  /* Centered content */
+  .content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    gap: 32px;
+  }
+
+  .brand {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .tagline {
+    font-size: clamp(0.9rem, 2.5vw, 1.25rem);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 300;
+  }
+
+  /* Semi-transparent glass button */
+  .btn {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 16px 48px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(0.75rem, 2vw, 0.95rem);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: background 0.4s ease, transform 0.3s ease;
+  }
+
+  .btn:hover,
+  .btn:focus-visible {
+    background: var(--glass-hover);
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn { transition: none; }
+    .bg-video { display: none; }
+    body { background: #111; }
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Background video: replace the src with your own video file -->
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="background.mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay"></div>
+
+  <main class="content">
+    <h1 class="brand">Cashler</h1>
+    <p class="tagline">Coming Soon</p>
+  </main>
+
+</body>
+</html>
