@@ -1,1 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<title>Cashler — Coming Soon</title>
+<style>
+  :root {
+    --overlay: rgba(0, 0, 0, 0.45);
+    --glass: rgba(255, 255, 255, 0.08);
+    --glass-hover: rgba(255, 255, 255, 0.16);
+    --border: rgba(255, 255, 255, 0.35);
+    --text: #ffffff;
+  }
 
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+  }
+
+  body {
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    color: var(--text);
+    position: relative;
+  }
+
+  /* Background video — centered with black margin */
+  .bg-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: calc(100% - 80px);
+    height: calc(100% - 80px);
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    z-index: 0;
+  }
+
+  /* Transparent dark overlay over the video */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--overlay);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Content — top center */
+  .content {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding: 64px 24px 24px;
+    z-index: 2;
+  }
+
+  .tagline {
+    font-size: clamp(0.9rem, 2.5vw, 1.25rem);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 300;
+  }
+
+  /* Sound toggle */
+  .sound-btn {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: var(--text);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    z-index: 10;
+  }
+
+  .sound-btn:hover,
+  .sound-btn:focus-visible {
+    background: var(--glass-hover);
+  }
+
+  .sound-btn:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 4px;
+  }
+
+  /* Smaller margin on mobile */
+  @media (max-width: 600px) {
+    .bg-video {
+      width: calc(100% - 32px);
+      height: calc(100% - 32px);
+    }
+    .sound-btn {
+      bottom: 20px;
+      right: 20px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sound-btn { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+  <video class="bg-video" autoplay muted loop playsinline webkit-playsinline preload="auto">
+    <source src="backgrounds.mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay"></div>
+
+  <main class="content">
+    <p class="tagline">Coming Soon</p>
+  </main>
+
+  <button class="sound-btn" id="soundToggle" aria-label="Toggle sound">🔇</button>
+
+  <script>
+    const video = document.querySelector('.bg-video');
+    const btn = document.getElementById('soundToggle');
+    btn.addEventListener('click', () => {
+      video.muted = !video.muted;
+      btn.textContent = video.muted ? '🔇' : '🔊';
+    });
+  </script>
+
+</body>
+</html>
