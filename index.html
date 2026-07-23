@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
 <title>Cashler — Coming Soon</title>
 <style>
   :root {
@@ -24,9 +25,6 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
-    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
-    color: var(--text);
-    position: relative;
     background: #000;
   }
 
@@ -36,7 +34,7 @@
     position: relative;
   }
 
-  /* Background video */
+  /* Background video — centered with black margin */
   .bg-video {
     position: fixed;
     top: 50%;
@@ -46,7 +44,7 @@
     transform: translate(-50%, -50%);
     object-fit: contain;
     z-index: -2;
-    }
+  }
 
   /* Transparent dark overlay over the video */
   .overlay {
@@ -56,7 +54,7 @@
     z-index: -1;
   }
 
-  /* Centered content */
+  /* Content — top center */
   .content {
     height: 100%;
     width: 100%;
@@ -66,13 +64,6 @@
     justify-content: flex-start;
     text-align: center;
     padding: 64px 24px 24px;
-    }
-
-  .brand {
-    font-size: clamp(2.5rem, 8vw, 5rem);
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
   }
 
   .tagline {
@@ -84,52 +75,57 @@
     font-weight: 300;
   }
 
-  /* Semi-transparent glass button */
-  .btn {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 16px 48px;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: clamp(0.75rem, 2vw, 0.95rem);
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--text);
-    text-decoration: none;
+  /* Sound toggle */
+  .sound-btn {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: var(--glass);
     border: 1px solid var(--border);
-    border-radius: 2px;
+    border-radius: 50%;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
+    color: var(--text);
+    font-size: 16px;
     cursor: pointer;
-    transition: background 0.4s ease, transform 0.3s ease;
+    transition: background 0.3s ease;
+    z-index: 10;
   }
 
-  .btn:hover,
-  .btn:focus-visible {
+  .sound-btn:hover,
+  .sound-btn:focus-visible {
     background: var(--glass-hover);
-    transform: translateY(-2px);
-    outline: none;
   }
 
-  .btn:focus-visible {
+  .sound-btn:focus-visible {
     outline: 2px solid var(--text);
     outline-offset: 4px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .btn { transition: none; }
+  /* Smaller margin on mobile */
+  @media (max-width: 600px) {
     .bg-video {
       width: calc(100% - 32px);
       height: calc(100% - 32px);
     }
-    body { background: #111; }
+    .sound-btn {
+      bottom: 20px;
+      right: 20px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sound-btn { transition: none; }
   }
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Background video: replace the src with your own video file -->
   <video class="bg-video" autoplay muted loop playsinline webkit-playsinline preload="auto">
     <source src="backgrounds.mp4" type="video/mp4">
   </video>
@@ -139,6 +135,17 @@
   <main class="content">
     <p class="tagline">Coming Soon</p>
   </main>
+
+  <button class="sound-btn" id="soundToggle" aria-label="Toggle sound">🔇</button>
+
+  <script>
+    const video = document.querySelector('.bg-video');
+    const btn = document.getElementById('soundToggle');
+    btn.addEventListener('click', () => {
+      video.muted = !video.muted;
+      btn.textContent = video.muted ? '🔇' : '🔊';
+    });
+  </script>
 
 </body>
 </html>
