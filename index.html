@@ -24,6 +24,10 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    color: var(--text);
+    position: relative;
+    background: #000;
   }
 
   body {
@@ -37,14 +41,12 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
+    width: calc(100% - 80px);
+    height: calc(100% - 80px);
     transform: translate(-50%, -50%);
-    object-fit: cover;
+    object-fit: contain;
     z-index: -2;
-  }
+    }
 
   /* Transparent dark overlay over the video */
   .overlay {
@@ -61,11 +63,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: center;
-    padding: 24px;
-    gap: 32px;
-  }
+    padding: 64px 24px 24px;
+    }
 
   .brand {
     font-size: clamp(2.5rem, 8vw, 5rem);
@@ -117,7 +118,10 @@
 
   @media (prefers-reduced-motion: reduce) {
     .btn { transition: none; }
-    .bg-video { display: none; }
+    .bg-video {
+      width: calc(100% - 32px);
+      height: calc(100% - 32px);
+    }
     body { background: #111; }
   }
 </style>
@@ -133,7 +137,6 @@
   <div class="overlay"></div>
 
   <main class="content">
-    <h1 class="brand">Cashler</h1>
     <p class="tagline">Coming Soon</p>
   </main>
 
